@@ -46,7 +46,7 @@ export async function create(req: IncomingMessage, res: ServerResponse) {
         await Blog.create({
         title: fields.title[0], 
         description: fields.description[0],
-        image: { filename: imageFile.name, data: imageBuffer, mimetype: imageFile[0].mimetype,url:dataURL},
+        image: { filename: imageFile[0].originalFilename, data: imageBuffer, mimetype: imageFile[0].mimetype,url:dataURL},
       });
       sendResponse(res, 200, { message: 'Blog created successfully' });
     } catch (error) {
@@ -91,7 +91,7 @@ export async function update(req: IncomingMessage, res: ServerResponse) {
       await Blog.findOneAndUpdate({_id : BlogId},{
       title: fields.title[0], 
       description: fields.description[0],
-      image: { filename: imageFile.name, data: imageBuffer, mimetype: imageFile[0].mimetype,url:dataURL},
+      image: { filename: imageFile[0].originalFilename, data: imageBuffer, mimetype: imageFile[0].mimetype,url:dataURL},
     });
       sendResponse(res, 200, { message: 'Blog updated successfully' });
     } catch (error) {
